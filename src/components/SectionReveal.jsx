@@ -128,9 +128,19 @@ export function Section({ id, label, heading, children }) {
         <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: "0.68rem", letterSpacing: "0.22em", color: theme.accent, textTransform: "uppercase", fontWeight: 500, marginBottom: "0.8rem" }}>
           {label}
         </div>
-        <h2 style={{ fontFamily: "'Syne',sans-serif", fontSize: "clamp(2rem,4.5vw,3.3rem)", fontWeight: 800, letterSpacing: "-0.045em", lineHeight: 1.04, marginBottom: "3.8rem", color: theme.text }}>
-          {heading}
-        </h2>
+        <h2
+  style={{
+    fontFamily: "'Space Grotesk', sans-serif",
+    fontSize: "clamp(2rem, 4.2vw, 3.1rem)",
+    fontWeight: 700,
+    letterSpacing: "-0.035em",
+    lineHeight: 1.08,
+    marginBottom: "3.5rem",
+    color: theme.text
+  }}
+>
+  {heading}
+</h2>
         {children}
       </SectionReveal>
     </section>

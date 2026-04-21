@@ -116,6 +116,19 @@ function Footer() {
         <a href={data.linkedin} target="_blank" rel="noreferrer" style={{ fontFamily: fonts.mono, fontSize: "0.72rem", color: "#A1A1AA", textDecoration: "none" }}>
           💼 linkedin.com/in/aryanmehta
         </a>
+        <a
+  href="https://wa.me/919880187441"
+  target="_blank"
+  rel="noreferrer"
+  style={{
+    fontFamily: fonts.mono,
+    fontSize: "0.72rem",
+    color: "#A1A1AA",
+    textDecoration: "none",
+  }}
+>
+  📱 WhatsApp
+</a>
       </div>
 
       <span style={{ fontFamily: fonts.display, fontSize: "0.75rem", color: theme.textMuted }}>

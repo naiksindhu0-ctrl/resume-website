@@ -7,12 +7,20 @@ import { Section, StaggerItem, AnimatedBar } from "../components/SectionReveal";
 // ─────────────────────────────────────────────
 //  About
 // ─────────────────────────────────────────────
-export function About() {
+export function About(){
+const [activeIndex, setActiveIndex] = useState(null);
+const handleEmojiClick = (index) => {
+  setActiveIndex(index);
+
+  setTimeout(() => {
+    setActiveIndex(null);
+  }, 600);
+};
   const aboutCards = [
-    { line1: "Open Source", line2: "Contributor", sub: "Since 2019" },
-    { line1: "Technical",   line2: "Writer",       sub: "100K+ reads" },
-    { line1: "Conference",  line2: "Speaker",      sub: "8 talks" },
-    { line1: "Mentor",      line2: "& Coach",      sub: "25+ mentees" },
+    { line1: "🌐 Open Source", line2: "Contributor", sub: "Since 2019" },
+    { line1: "💻 Technical",   line2: "Writer",       sub: "100K+ reads" },
+    { line1: "🎤 Conference",  line2: "Speaker",      sub: "8 talks" },
+    { line1: "🌱 Mentor",      line2: "& Coach",      sub: "25+ mentees" },
   ];
 
   return (
@@ -43,7 +51,21 @@ export function About() {
               <StaggerItem key={card.line1} index={i}>
                 <div className="tilt-card" style={{ background: theme.bgCard, border: `1px solid ${theme.border}`, borderRadius: "18px", padding: "1.6rem", cursor: "default" }} {...tilt}>
                   <div className="card-glow" />
-                  <div style={{ fontFamily: fonts.display, fontWeight: 700, fontSize: "1.02rem", color: theme.text, lineHeight: 1.2 }}>{card.line1}</div>
+                  <div
+  onClick={() => handleEmojiClick(i)}
+  style={{
+    fontFamily: fonts.display,
+    fontWeight: 700,
+    fontSize: "1.02rem",
+    color: theme.text,
+    cursor: "pointer",
+    display: "inline-block",
+    transition: "transform 0.3s ease",
+    transform: activeIndex === i ? "translateY(-10px) scale(1.2)" : "none"
+  }}
+>
+  {card.line1}
+</div>
                   <div style={{ fontFamily: fonts.display, fontWeight: 700, fontSize: "1.02rem", color: theme.accent, marginBottom: "0.6rem" }}>{card.line2}</div>
                   <div style={{ fontFamily: fonts.mono, fontSize: "0.7rem", color: theme.textMuted }}>{card.sub}</div>
                 </div>
@@ -100,7 +122,21 @@ export function Experience() {
                   {openIdx === i && (
                     <div style={{ marginTop: "1.5rem", paddingTop: "1.3rem", borderTop: `1px solid ${theme.border}` }}>
                       {exp.points.map((p, j) => (
-                        <div key={j} style={{ display: "flex", gap: "0.8rem", marginBottom: "0.8rem", opacity: 0, transform: "translateX(-18px)", animation: `fadeSlideUp 0.5s cubic-bezier(0.16,1,0.3,1) ${j * 0.1}s forwards` }}>
+                        <div
+  key={j}
+  style={{
+    display: "flex",
+    gap: "0.8rem",
+    marginBottom: "0.8rem",
+
+    // initial state
+    opacity: 0,
+    transform: "translateY(40px) scale(0.95) rotateX(15deg)",
+
+    // animation
+    animation: `cardReveal 0.7s cubic-bezier(0.16,1,0.3,1) ${j * 0.12}s forwards`
+  }}
+>
                           <span style={{ color: exp.color, flexShrink: 0, fontWeight: 700, fontSize: "1rem", marginTop: "1px" }}>→</span>
                           <span style={{ fontSize: "0.9rem", color: theme.textMuted, lineHeight: 1.72 }}>{p}</span>
                         </div>
@@ -215,6 +251,11 @@ function CertIconMagnet({ icon, color }) {
 }
 
 export function Certifications() {
+  const [flippedIndex, setFlippedIndex] = useState(null);
+
+  const handleFlip = (i) => {
+    setFlippedIndex(flippedIndex === i ? null : i);
+  };
   return (
     <Section id="certifications" label="// certifications" heading="Credentials">
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(210px, 1fr))", gap: "1.2rem" }}>
@@ -222,8 +263,51 @@ export function Certifications() {
           const tilt = useTilt(13);
           return (
             <StaggerItem key={i} index={i}>
-              <div className="tilt-card" style={{ background: theme.bgCard, border: `1px solid ${theme.border}`, borderRadius: "18px", padding: "1.8rem", display: "flex", flexDirection: "column", gap: "0.9rem", cursor: "default", position: "relative", overflow: "hidden" }} {...tilt}>
-                <div className="card-glow" />
+              <div
+  className="tilt-card"
+  onClick={() => handleFlip(i)}
+  style={{
+    background: theme.bgCard,
+    border: `1px solid ${theme.border}`,
+    borderRadius: "18px",
+    padding: "1.8rem",
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.9rem",
+    cursor: "pointer",
+    position: "relative",
+    overflow: "hidden",
+    transformStyle: "preserve-3d",
+    transition: "transform 0.8s cubic-bezier(0.16,1,0.3,1)",
+    transform: flippedIndex === i ? "rotateY(180deg)" : "rotateY(0deg)"
+  }}
+  
+  {...tilt}
+>
+  {/* BACK SIDE */}
+<div
+  style={{
+    position: "absolute",
+    inset: 0,
+    transform: "rotateY(180deg)",
+    backfaceVisibility: "hidden",
+    padding: "1.8rem",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    gap: "0.6rem",
+    color: theme.textMuted,
+    fontSize: "0.85rem"
+  }}
+>
+  <div style={{ color: theme.accent, fontFamily: fonts.display, fontWeight: 700 }}>
+    Certificate Details
+  </div>
+
+  <p>🏢 Issued by: {c.org}</p>
+  <p>📅 Year: {c.year}</p>
+  <p>🎓 Verified Certification</p>
+</div>
                 <div style={{ position: "absolute", top: 0, right: 0, width: "70px", height: "70px", background: `radial-gradient(circle at 80% 20%, ${c.color}18 0%, transparent 70%)` }} />
                 <CertIconMagnet icon={c.icon} color={c.color} />
                 <div style={{ fontFamily: fonts.display, fontWeight: 700, fontSize: "0.93rem", lineHeight: 1.35, color: theme.text }}>{c.name}</div>
@@ -323,6 +407,13 @@ export function Contact() {
     { icon: "✉️", label: "Email",    val: data.email,    href: `mailto:${data.email}`,  newTab: false },
     { icon: "🔗", label: "LinkedIn", val: data.linkedin, href: data.linkedin,            newTab: true  },
     { icon: "🐙", label: "GitHub",   val: data.github,   href: data.github,              newTab: true  },
+    {
+  icon: "💬",
+  label: "WhatsApp",
+  val: "Chat on WhatsApp",
+  href: "https://wa.me/919591315086",
+  newTab: true
+}
   ];
 
   return (

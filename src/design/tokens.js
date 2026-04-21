@@ -16,11 +16,10 @@ export const theme = {
 };
 
 export const fonts = {
-  display: "'Syne', sans-serif",
-  body: "'DM Sans', sans-serif",
-  mono: "'JetBrains Mono', monospace",
+  display: "'Space Grotesk', sans-serif",
+  body: "'Inter', sans-serif",
+  mono: "'JetBrains Mono', monospace"
 };
-
 export const easing = "cubic-bezier(0.16,1,0.3,1)";
 
 export const data = {

@@ -93,6 +93,7 @@ export default function Hero() {
                 ["📍", data.location, "location", null],
                 ["✉️", data.email,    "email",    `mailto:${data.email}`],
                 ["🐙", data.github,   "github",   data.github],
+                ["💬", "WhatsApp",    "whatsapp", `https://wa.me/919880187441`],
               ].map(([icon, val, type, href]) => (
                 <a
                   key={val}

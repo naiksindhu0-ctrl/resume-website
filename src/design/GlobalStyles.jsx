@@ -63,6 +63,16 @@ export default function GlobalStyles() {
         from { opacity: 0; transform: translateY(28px); }
         to   { opacity: 1; transform: translateY(0); }
       }
+        @keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95) rotateX(15deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+  }
+}
       @keyframes scanGlow {
         0%,100% { opacity: 0.3; }
         50%     { opacity: 0.7; }
@@ -75,6 +85,15 @@ export default function GlobalStyles() {
         0%   { transform: translateX(-100%); }
         100% { transform: translateX(100%); }
       }
+
+      h1, h2, h3, h4, h5 {
+  background: linear-gradient(135deg, #C8FF00 0%, #00D4FF 50%, #7B5EA7 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease infinite;
+}
 
       /* ── Utility classes ───────────────────────── */
       .gradient-text {
